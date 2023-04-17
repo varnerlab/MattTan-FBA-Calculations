@@ -11,6 +11,7 @@ using Distributions
 using Statistics
 using LinearAlgebra
 using MAT
+using JSON
 
 # load my codes -
 include(joinpath(_PATH_TO_SRC, "Types.jl"))
