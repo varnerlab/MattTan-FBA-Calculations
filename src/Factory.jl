@@ -50,7 +50,6 @@ function _build_bounds_array(data::Dict{String,Any})::Array{Float64,2}
     number_of_reactions = length(list_of_reactions) + 1; # we add an extra reaction for cellmass 
     default_vmax = 170.37673846153842; # computed from biophys dictionary 
 
-
     # default flux bounds array -
     default_flux_bounds_array = zeros(number_of_reactions,2)
     lb = data["lb"] # lower bound -
