@@ -1,7 +1,3 @@
-function measurements(path::String)::DataFrame
-    return CSV.read(path, DataFrame);
-end
-
 function _model(path::String; modelname::String="CoreCancerModel_v1")
 
     # load -
@@ -48,3 +44,34 @@ function _load_biomass_components_dict(path::String)::Dict{String,Float64}
     # return -
     return compounds;
 end
+
+# == PUBLIC METHODS BELOW HERE ================================================================ #
+function measurements(path::String)::DataFrame
+    return CSV.read(path, DataFrame);
+end
+
+function output(model::MyCoreCancerModel, flux_array::Array{Float64,2})
+
+    # initialize -
+    list_of_reactions = model.list_of_reactions
+    number_of_reactions = length(list_of_reactions);
+    df = DataFrame(reaction=String[],mean=Float64[],std=Float64[]);
+
+    for i ∈ 1:number_of_reactions
+        
+        # get the reaction id -
+        reaction_id = list_of_reactions[i];
+        μ = mean(flux_array[i,:])
+        σ = std(flux_array[i,:]);
+        
+        results_tuple = (
+            reaction = reaction_id,
+            mean = μ,
+            std = σ
+        );
+        push!(df, results_tuple);
+    end
+
+    return df
+end
+# == PUBLIC METHODS ABOVE HERE ================================================================ #
