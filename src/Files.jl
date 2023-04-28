@@ -1,5 +1,5 @@
-function flux(path::String)::DataFrame
-    return CVS.read(path, DataFrame);
+function measurements(path::String)::DataFrame
+    return CSV.read(path, DataFrame);
 end
 
 function _model(path::String; modelname::String="CoreCancerModel_v1")
