@@ -65,11 +65,15 @@ function flux(model::MyCoreCancerModel, data::NamedTuple)::Tuple{Bool, Dict{Stri
         end
     );
 
+    # only internal fluxes
+    Z = v[35:number_of_reactions]
+
     # add a crowding constraint -
     crowding_constraint = 0.0074;
+    #crowding_constraint = 1e-6;
     @constraints(lpmodel, 
         begin
-            sum(v) <= (1/crowding_constraint)
+            sum(Z) <= (1/crowding_constraint)
         end
     );
    

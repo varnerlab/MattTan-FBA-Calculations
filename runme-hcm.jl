@@ -5,7 +5,7 @@ include("Include.jl")
 distribution_dict = Dict{String,Normal}()
 
 # load the measurements file -
-path_to_measurements_file = joinpath(_PATH_TO_DATA, "FluxData-24-48-hr.csv")
+path_to_measurements_file = joinpath(_PATH_TO_DATA, "FluxData-24-48-hr-v3.csv")
 df = measurements(path_to_measurements_file)
 
 # build the distributions for CTRL -
@@ -26,7 +26,8 @@ path_to_model_file = joinpath(_PATH_TO_MODEL, "CoreCancerModel_v1.mat");
 model = build(MyCoreCancerModel,path_to_model_file);
 
 # sample -
-#obj = ["growth"];
+# obj = ["growth"];
+# obj = ["EX_ha(e)"];
 obj = ["EX_ha(e)", "growth"]
 flux_array = sample(model,distribution_dict,obj; N = 1000, constrained = nothing);
 

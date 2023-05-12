@@ -63,7 +63,6 @@ function _build_bounds_array(data::Dict{String,Any})::Array{Float64,2}
     default_flux_bounds_array[end,1] = 0.0
     default_flux_bounds_array[end,2] = 1.0
 
-
     (number_of_bounds, number_of_cols) = size(default_flux_bounds_array)
     flux_bounds_array = zeros(number_of_bounds,2)
     for bound_index = 1:number_of_bounds
@@ -78,6 +77,24 @@ function _build_bounds_array(data::Dict{String,Any})::Array{Float64,2}
         if (upper_bound!=0.0)
             flux_bounds_array[bound_index,2] = sign(upper_bound)*default_vmax
         end
+    end
+
+    # correct -
+    idx_palsson = [13,40,82,83,87,266,275,303,206,385];
+    palsson_vmax = 1000.0
+    for idx ∈ idx_palsson
+
+        lower_bound = default_flux_bounds_array[idx,1]
+        upper_bound = default_flux_bounds_array[idx,2]
+
+        if (lower_bound!=0.0)
+            flux_bounds_array[idx,1] = sign(lower_bound)*palsson_vmax
+        end
+
+        if (upper_bound!=0.0)
+            flux_bounds_array[idx,2] = sign(upper_bound)*palsson_vmax
+        end
+
     end
 
     # return -
