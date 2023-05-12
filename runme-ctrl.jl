@@ -27,11 +27,11 @@ model = build(MyCoreCancerModel,path_to_model_file);
 
 # sample -
 # obj = ["growth"];
-obj = ["EX_ha(e)"]
+obj = ["EX_ha(e)", "growth"]
 flux_array = sample(model,distribution_dict,obj; N = 1000, constrained = nothing);
 
 # build output -
 df_output = output(model,flux_array)
 
 # write -
-CSV.write(joinpath(_PATH_TO_SIMS, "CTRL-fluxes-24-48-HA-v3.csv"), df_output)
+CSV.write(joinpath(_PATH_TO_SIMS, "CTRL-fluxes-24-48-HA-Growth-v3.csv"), df_output)
