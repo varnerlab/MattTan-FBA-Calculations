@@ -66,7 +66,7 @@ function flux(model::MyCoreCancerModel, data::NamedTuple)::Tuple{Bool, Dict{Stri
     );
 
     # add a crowding constraint -
-    crowding_constraint = 0.0054;
+    crowding_constraint = 0.0074;
     @constraints(lpmodel, 
         begin
             sum(v) <= (1/crowding_constraint)
@@ -105,13 +105,16 @@ function sample(model::MyCoreCancerModel, measurements::Dict{String,Normal}, obj
     should_loop = true
     while (should_loop == true)
         
+        @info local_counter
+
         # initialize -
+        L = 0.80;
         sample_dictionary = Dict{String,Vector{Float64}}();
         for (key,d) ∈ measurements
             
             # draw 10 samples -
             tmp = rand(d);
-            values = sort([0.9*tmp,1.1*tmp]);
+            values = sort([L*tmp, (1/L)*tmp]);
             sample_dictionary[key] = values;
         end
 
