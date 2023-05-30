@@ -6,6 +6,7 @@ const _PATH_TO_MODEL = joinpath(_ROOT, "model");
 const _PATH_TO_SIMS = joinpath(_ROOT, "sims");
 
 # load external packages -
+import Pkg; Pkg.activate("."); Pkg.instantiate();
 using JuMP
 using GLPK
 using Distributions
