@@ -24,5 +24,4 @@ docs/site/
 Manifest.toml
 
 # JV - don't check in the data -
-data
 .DS_Store

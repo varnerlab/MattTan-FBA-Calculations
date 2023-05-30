@@ -5,7 +5,7 @@ include("Include.jl")
 distribution_dict = Dict{String,Normal}()
 
 # load the measurements file -
-path_to_measurements_file = joinpath(_PATH_TO_DATA, "FluxData-24-48-hr-v3.csv")
+path_to_measurements_file = joinpath(_PATH_TO_DATA, "FluxData-0-48-hr-v3-HCM.csv")
 df = measurements(path_to_measurements_file)
 
 # build the distributions for CTRL -
@@ -28,11 +28,11 @@ model = build(MyCoreCancerModel,path_to_model_file);
 # sample -
 # obj = ["growth"];
 # obj = ["EX_ha(e)"];
-obj = ["EX_ha(e)", "growth"]
+obj = ["EX_ha(e)"]
 flux_array = sample(model,distribution_dict,obj; N = 1000, constrained = nothing);
 
 # build output -
 df_output = output(model,flux_array)
 
 # write -
-CSV.write(joinpath(_PATH_TO_SIMS, "HCM-fluxes-24-48-HA-Growth-v3.csv"), df_output)
+CSV.write(joinpath(_PATH_TO_SIMS, "HCM-fluxes-0-48-HA-v4.csv"), df_output)

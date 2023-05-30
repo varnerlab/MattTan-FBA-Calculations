@@ -112,7 +112,7 @@ function sample(model::MyCoreCancerModel, measurements::Dict{String,Normal}, obj
         @info local_counter
 
         # initialize -
-        L = 0.80;
+        L = 0.90;
         sample_dictionary = Dict{String,Vector{Float64}}();
         for (key,d) ∈ measurements
             
