@@ -5,7 +5,7 @@ include("Include.jl")
 distribution_dict = Dict{String,Normal}()
 
 # load the measurements file -
-path_to_measurements_file = joinpath(_PATH_TO_DATA, "FluxData-0-48-hr-v4-HCM.csv")
+path_to_measurements_file = joinpath(_PATH_TO_DATA, "FluxData-0-48-hr-v4-REDUCED.csv")
 df = measurements(path_to_measurements_file)
 
 # build the distributions for CTRL -
